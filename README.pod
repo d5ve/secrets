@@ -9,34 +9,41 @@ secrets - Simple encrypted password and metadata store for commandline
     Operations involving names will prompt for the name to prevent the
     names appearing in shell history.
 
-    Usage: secrets [options]
+    Usage: secrets [options] <action>
 
     Options:
 
-        --list          - List the available secret names.
         --file=FILE     - Optional file containing secrets.
                           Defaults to ~/.secrets
-        --print         - Print the password and other metadata about a particular secret.
-        --add           - Add a new secret. This prompts for username/password etc.
-        --edit          - Edit an existing secret.
-        --delete        - Delete an existing secret.
+        --help|?        - Print the help docs. Default behaviour.
+
+
+    Actions:
+
+        list|ls         - List the available secret names.
+        print           - Print the password and other metadata about a particular secret.
+        add             - Add a new secret. This prompts for username/password etc.
+        edit            - Edit an existing secret.
+        delete          - Delete an existing secret.
+        help            - Print help docs. Default action.
+
 
     Examples:
     
         # List the names of the stored secrets.
-        secrets --list
-        secrets -ls
+        secrets list
+        secrets ls
 
         # Print to STDOUT the username/password and other metadata about
         # a secret.
         # You will be prompted for the name of the secret to print.
-        secrets --print 
+        secrets print 
 
         # Add/Edit/Delete a secret.
         # You will be prompted for the name of the secret.
-        secrets --add
-        secrets --edit
-        secrets --delete 
+        secrets add
+        secrets edit
+        secrets delete 
 
 =head1 DESCRIPTION
 
@@ -58,5 +65,7 @@ secrets is free software. It comes without any warranty, to the extent permitted
 by applicable law.
 
 secrets is released under the I<WTFPL Version 2.0> license - L<http://sam.zoy.org/wtfpl/COPYING>
+
+0. You just DO WHAT THE FUCK YOU WANT TO.
 
 =cut
