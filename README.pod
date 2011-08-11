@@ -1,0 +1,62 @@
+=head1 NAME
+
+secrets - Simple encrypted password and metadata store for commandline
+
+=head1 SYNOPSIS
+
+    All operations prompt for the master password before doing anything.
+
+    Operations involving names will prompt for the name to prevent the
+    names appearing in shell history.
+
+    Usage: secrets [options]
+
+    Options:
+
+        --list          - List the available secret names.
+        --file=FILE     - Optional file containing secrets.
+                          Defaults to ~/.secrets
+        --print         - Print the password and other metadata about a particular secret.
+        --add           - Add a new secret. This prompts for username/password etc.
+        --edit          - Edit an existing secret.
+        --delete        - Delete an existing secret.
+
+    Examples:
+    
+        # List the names of the stored secrets.
+        secrets --list
+        secrets -ls
+
+        # Print to STDOUT the username/password and other metadata about
+        # a secret.
+        # You will be prompted for the name of the secret to print.
+        secrets --print 
+
+        # Add/Edit/Delete a secret.
+        # You will be prompted for the name of the secret.
+        secrets --add
+        secrets --edit
+        secrets --delete 
+
+=head1 DESCRIPTION
+
+secrets is a simple commandline password keeper, written in perl, which
+maintains an encrypted file containing a list of secrets. A secret is a set of
+standard data like username, password, URL, plus a block of unstructured
+metadata. This allows you to also store things like memorable dates or places,
+favourite sports teams, mother's maiden names for each place you need a login.
+Being able to make all this data up for each login, and remember it, means that
+it's less likely that someone could masquerade as you.
+
+=head1 AUTHOR
+
+Dave Webb L<secrets.github@d5ve.com>
+
+=head1 LICENSE
+
+secrets is free software. It comes without any warranty, to the extent permitted
+by applicable law.
+
+secrets is released under the I<WTFPL Version 2.0> license - L<http://sam.zoy.org/wtfpl/COPYING>
+
+=cut
