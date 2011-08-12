@@ -6,8 +6,9 @@ secrets - Simple encrypted password and metadata store for commandline
 
     All operations prompt for the master password before doing anything.
 
-    Operations involving names will prompt for the name to prevent the
-    names appearing in shell history.
+    Any operations which need the user to specify the name of a secret will
+    prompt for it interactively, rather than passing it directly as an argument.
+    This prevents the names of secrets appearing in the user's shell history.
 
     Usage: secrets [options] <action>
 
@@ -54,6 +55,11 @@ metadata. This allows you to also store things like memorable dates or places,
 favourite sports teams, mother's maiden names for each place you need a login.
 Being able to make all this data up for each login, and remember it, means that
 it's less likely that someone could masquerade as you.
+
+=head1 CAVEATS
+
+This script does no file locking, so running it in parallel may result in data
+loss, where the last writer wins.
 
 =head1 AUTHOR
 
