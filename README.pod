@@ -56,6 +56,40 @@ favourite sports teams, mother's maiden names for each place you need a login.
 Being able to make all this data up for each login, and remember it, means that
 it's less likely that someone could masquerade as you.
 
+Each secret contains the following fields.
+
+=over 4
+
+=item * Name - This is a required field, and holds the main identifier for this
+secret. Examples might be "Online Bank", or "SSL certificate password". This
+field is shown in C<list> mode.
+
+=item * Canonical name - This is derived from the Name field, and is currently
+just a lowercased version. This is used as a hash key to prevent accidental
+duplication due to case issues.
+
+=item * Description - This is an optional short description of the secret. It is
+shown in C<list> mode.
+
+=item * Username - This is an optional field used to hold a username, login ID,
+email address etc. 
+
+=item * Password - This is an optional field used to hold a password. The user
+enters this data twice to confirm that they have typed it correctly, and no
+output is shown on the screen.
+
+=item * Url - An optional field which can hold the URL of the service or login
+page etc. No checking is done to make sure that the data in this field is
+actually a URL.
+
+=item * Metadata - An optional multi-line free-text field. This can be used for
+any arbitrary other information required about the secret. For example, an
+online banking login may ask you for answers to questions such as mother's
+maiden name, or memorable dates. It's more secure if you don't use real values
+for these, and instead just make the answers up anew for each login.
+
+=back
+
 =head1 CAVEATS
 
 This script does no file locking, so running it in parallel may result in data
