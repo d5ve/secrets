@@ -1,10 +1,10 @@
 =head1 NAME
 
-secrets - Simple encrypted password and metadata store for commandline.
+secrets - Simple encrypted password and notes store for commandline.
 
 =head1 SYNOPSIS
 
-    B<secrets> is a simple encrypted password and metadata store for the commandline.
+    B<secrets> is a simple encrypted password and notes store for the commandline.
 
     Usage: secrets [options] <action>
 
@@ -18,7 +18,7 @@ secrets - Simple encrypted password and metadata store for commandline.
     Actions:
 
         list|ls         - List the available secret names.
-        print           - Print the password and other metadata about a particular secret.
+        print           - Print the password and other notes about a particular secret.
         add             - Add a new secret. This prompts for username/password etc.
         edit            - Edit an existing secret.
         delete          - Delete an existing secret.
@@ -36,7 +36,7 @@ secrets - Simple encrypted password and metadata store for commandline.
         $ secrets list
         $ secrets ls
 
-        # Print to STDOUT the username/password and other metadata about
+        # Print to STDOUT the username/password and other notes about
         # a secret.
         # You will be prompted for the name of the secret to print.
         $ secrets print 
@@ -52,7 +52,7 @@ secrets - Simple encrypted password and metadata store for commandline.
 secrets is a simple commandline password keeper, written in perl, which
 maintains an encrypted file containing a list of secrets. A secret is a set of
 standard data like username, password, URL, plus a block of unstructured
-metadata. This allows you to also store things like memorable dates or places,
+notes. This allows you to also store things like memorable dates or places,
 favourite sports teams, mother's maiden names for each place you need a login.
 Being able to make all this data up for each login, and remember it, means that
 it's less likely that someone could masquerade as you.
@@ -83,7 +83,7 @@ output is shown on the screen.
 page etc. No checking is done to make sure that the data in this field is
 actually a URL.
 
-=item * Metadata - An optional multi-line free-text field. This can be used for
+=item * Notes - An optional multi-line free-text field. This can be used for
 any arbitrary other information required about the secret. For example, an
 online banking login may ask you for answers to questions such as mother's
 maiden name, or memorable dates. It's more secure if you don't use real values
