@@ -1,14 +1,10 @@
 =head1 NAME
 
-secrets - Simple encrypted password and metadata store for commandline
+secrets - Simple encrypted password and metadata store for commandline.
 
 =head1 SYNOPSIS
 
-    All operations prompt for the master password before doing anything.
-
-    Any operations which need the user to specify the name of a secret will
-    prompt for it interactively, rather than passing it directly as an argument.
-    This prevents the names of secrets appearing in the user's shell history.
+    B<secrets> is a simple encrypted password and metadata store for the commandline.
 
     Usage: secrets [options] <action>
 
@@ -28,6 +24,11 @@ secrets - Simple encrypted password and metadata store for commandline
         delete          - Delete an existing secret.
         help            - Print help docs. Default action.
 
+    All operations prompt for the master password before doing anything.
+
+    Any operations which need the user to specify the name of a secret will
+    prompt for it interactively, rather than passing it directly as an argument.
+    This prevents the names of secrets appearing in the user's shell history.
 
     Examples:
     
