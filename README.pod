@@ -32,19 +32,19 @@ secrets - Simple encrypted password and metadata store for commandline
     Examples:
     
         # List the names of the stored secrets.
-        secrets list
-        secrets ls
+        $ secrets list
+        $ secrets ls
 
         # Print to STDOUT the username/password and other metadata about
         # a secret.
         # You will be prompted for the name of the secret to print.
-        secrets print 
+        $ secrets print 
 
         # Add/Edit/Delete a secret.
         # You will be prompted for the name of the secret.
-        secrets add
-        secrets edit
-        secrets delete 
+        $ secrets add
+        $ secrets edit
+        $ secrets delete 
 
 =head1 DESCRIPTION
 
