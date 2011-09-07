@@ -1,10 +1,14 @@
 =head1 NAME
 
-secrets - Simple encrypted password and notes store for commandline.
+B<secrets> - Simple secure storage for logins and passwords.
+
+=head1 VERSION
+
+0.91 - Just good enough for daily use.
 
 =head1 SYNOPSIS
 
-    B<secrets> is a simple encrypted password and notes store for the commandline.
+B<secrets> is a simple secure store for logins and passwords.
 
     Usage: secrets [options] <action>
 
@@ -13,7 +17,7 @@ secrets - Simple encrypted password and notes store for commandline.
         --file=FILE     - Optional file containing secrets.
                           Defaults to ~/.secrets
         --help|?        - Print the help docs. Default behaviour.
-
+        --man           - Print the full POD manual.
 
     Actions:
 
@@ -49,13 +53,15 @@ secrets - Simple encrypted password and notes store for commandline.
 
 =head1 DESCRIPTION
 
-secrets is a simple commandline password keeper, written in perl, which
+B<secrets> is a simple commandline password keeper, written in perl, which
 maintains an encrypted file containing a list of secrets. A secret is a set of
 standard data like username, password, URL, plus a block of unstructured
 notes. This allows you to also store things like memorable dates or places,
 favourite sports teams, mother's maiden names for each place you need a login.
 Being able to make all this data up for each login, and remember it, means that
 it's less likely that someone could masquerade as you.
+
+B<secrets> currently uses Blowfish, via Crypt::CBC to encrypt the secrets file.
 
 Each secret contains the following fields.
 
@@ -93,8 +99,63 @@ for these, and instead just make the answers up anew for each login.
 
 =head1 CAVEATS
 
+The author of this script isn't a security professional, and this script hasn't
+been audited for flaws or bugs - which there almost certainly are.
+
 This script does no file locking, so running it in parallel may result in data
 loss, where the last writer wins.
+
+If you run it with blank or missing secrets file, it will create a new one for
+you. However it will only ask for the master password once!
+
+=head1 TODO
+
+=over 4
+
+=item * Add messages when a new password file is about to be created. Plus
+prompt for the new master password twice.
+
+=item * Allow you to change the master password - will require reading the file
+into memory, then prompting for new password twice, then writing it back out.
+
+=item * Serialise using something different to Storable, to allow non-perl
+scripts to also use the secrets file. JSON seems a likely contender, at the
+expense of needing extra CPAN installs.
+
+=item * Look at file locking to prevent data loss.
+
+=item * Allow tweaking of encryption parameters.
+
+=item * Enforce useful-length master passwords.
+
+=item * Look at what perl can do to make it more difficult to recover passwords
+from RAM.
+
+=item * Look at ways to try and prevent the OS swapping the decrypted data to
+disk.
+
+=item * Look at pattern matching canonical names, rather than requiring exact
+matches.
+
+=item * Look at adding a group level of hierarchy, for example, being able to
+group all your banking logins together somehow.
+
+=back
+
+=head1 SEE ALSO
+
+=over 4
+
+=item * B<pwsafe> from http://nsd.dyndns.org/pwsafe/
+
+This is a commandline frontend to the B<Counterpane Password Safe> data files.
+
+I used B<pwsafe> for a year or so, but was frustrated that it didn't allow me
+to store much data about a particular login. B<secrets> shares some of the
+basic process flow with B<pwsafe>, but adds a general notes storage. B<pwsafe>
+has far more features than B<secrets>.
+
+=back
 
 =head1 AUTHOR
 
@@ -102,10 +163,10 @@ Dave Webb L<secrets.github@d5ve.com>
 
 =head1 LICENSE
 
-secrets is free software. It comes without any warranty, to the extent permitted
+B<secrets> is free software. It comes without any warranty, to the extent permitted
 by applicable law.
 
-secrets is released under the I<WTFPL Version 2.0> license - L<http://sam.zoy.org/wtfpl/COPYING>
+B<secrets> is released under the I<WTFPL Version 2.0> license - L<http://sam.zoy.org/wtfpl/COPYING>
 
 0. You just DO WHAT THE FUCK YOU WANT TO.
 
