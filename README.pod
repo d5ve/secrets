@@ -4,7 +4,7 @@ B<secrets> - Simple secure storage for logins and passwords.
 
 =head1 VERSION
 
-0.90 - Just good enough for daily use.
+0.91 - Just good enough for daily use.
 
 =head1 SYNOPSIS
 
@@ -105,9 +105,18 @@ been audited for flaws or bugs - which there almost certainly are.
 This script does no file locking, so running it in parallel may result in data
 loss, where the last writer wins.
 
+If you run it with blank or missing secrets file, it will create a new one for
+you. However it will only ask for the master password once!
+
 =head1 TODO
 
 =over 4
+
+=item * Add messages when a new password file is about to be created. Plus
+prompt for the new master password twice.
+
+=item * Allow you to change the master password - will require reading the file
+into memory, then prompting for new password twice, then writing it back out.
 
 =item * Serialise using something different to Storable, to allow non-perl
 scripts to also use the secrets file. JSON seems a likely contender, at the
@@ -124,6 +133,9 @@ from RAM.
 
 =item * Look at ways to try and prevent the OS swapping the decrypted data to
 disk.
+
+=item * Look at pattern matching canonical names, rather than requiring exact
+matches.
 
 =item * Look at adding a group level of hierarchy, for example, being able to
 group all your banking logins together somehow.
