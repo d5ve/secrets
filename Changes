@@ -1,4 +1,9 @@
-Revision history for Perl extension Crypt::CBC.
+Revision history for secrets perl script.
+
+1.02    2013-09-01
+    - Fixed bug in upgrade_secrets_file() which was causing it to silently fail
+      to upgrade the secrets file.
+    
 1.01    2013-09-01
     - Major rewrite to add a mainloop and multiple actions per script run.
     

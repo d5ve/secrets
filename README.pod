@@ -4,7 +4,7 @@ B<secrets> - Simple secure storage for logins and passphrases.
 
 =head1 VERSION
 
-1.01 - Rewrite for multiple operations.
+1.02 - Rewrite for multiple operations.
 
 =head1 SYNOPSIS
 
