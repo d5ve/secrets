@@ -1,16 +1,16 @@
 =head1 NAME
 
-B<secrets> - Simple secure storage for logins and passwords.
+B<secrets> - Simple secure storage for logins and passphrases.
 
 =head1 VERSION
 
-0.91 - Just good enough for daily use.
+1.01 - Rewrite for multiple operations.
 
 =head1 SYNOPSIS
 
-B<secrets> is a simple secure store for logins and passwords.
+B<secrets> is a simple secure store for logins and passphrases.
 
-    Usage: secrets [options] <action>
+    Usage: secrets [options] 
 
     Options:
 
@@ -19,56 +19,34 @@ B<secrets> is a simple secure store for logins and passwords.
         --help|?        - Print the help docs. Default behaviour.
         --man           - Print the full POD manual.
 
-    Actions:
+=head1 ACTIONS ONCE RUNNING
 
         list|ls         - List the available secret names.
-        print           - Print the password and other notes about a particular secret.
-        add             - Add a new secret. This prompts for username/password etc.
-        edit            - Edit an existing secret.
-        delete          - Delete an existing secret.
+        add             - Add a new secret. This prompts for username/passphrase etc.
+        print <name>    - Print the passphrase and other notes about a particular secret.
+        edit <name>     - Edit an existing secret.
+        delete <name>   - Delete an existing secret.
         help            - Print help docs. Default action.
-
-    All operations prompt for the master password before doing anything.
-
-    Any operations which need the user to specify the name of a secret will
-    prompt for it interactively, rather than passing it directly as an argument.
-    This prevents the names of secrets appearing in the user's shell history.
-
-    Examples:
-    
-        # List the names of the stored secrets.
-        $ secrets list
-        $ secrets ls
-
-        # Print to STDOUT the username/password and other notes about
-        # a secret.
-        # You will be prompted for the name of the secret to print.
-        $ secrets print 
-
-        # Add/Edit/Delete a secret.
-        # You will be prompted for the name of the secret.
-        $ secrets add
-        $ secrets edit
-        $ secrets delete 
+        exit|quit       - Exit the program.
 
 =head1 DESCRIPTION
 
-B<secrets> is a simple commandline password keeper, written in perl, which
+B<secrets> is a simple commandline passphrase keeper, written in perl, which
 maintains an encrypted file containing a list of secrets. A secret is a set of
-standard data like username, password, URL, plus a block of unstructured
+standard data like username, passphrase, URL, plus a block of unstructured
 notes. This allows you to also store things like memorable dates or places,
 favourite sports teams, mother's maiden names for each place you need a login.
 Being able to make all this data up for each login, and remember it, means that
 it's less likely that someone could masquerade as you.
 
-B<secrets> currently uses Blowfish, via Crypt::CBC to encrypt the secrets file.
+B<secrets> currenty uses Blowfish, via Crypt::CBC to encrypt the secrets file.
 
 Each secret contains the following fields.
 
 =over 4
 
 =item * Name - This is a required field, and holds the main identifier for this
-secret. Examples might be "Online Bank", or "SSL certificate password". This
+secret. Examples might be "Online Bank", or "SSL certificate passphrase". This
 field is shown in C<list> mode.
 
 =item * Canonical name - This is derived from the Name field, and is currently
@@ -81,9 +59,9 @@ shown in C<list> mode.
 =item * Username - This is an optional field used to hold a username, login ID,
 email address etc. 
 
-=item * Password - This is an optional field used to hold a password. The user
-enters this data twice to confirm that they have typed it correctly, and no
-output is shown on the screen.
+=item * Passphrase - This is an optional field used to hold a passphrase. The
+user enters this data twice to confirm that they have typed it correctly, and
+no output is shown on the screen.
 
 =item * Url - An optional field which can hold the URL of the service or login
 page etc. No checking is done to make sure that the data in this field is
@@ -100,36 +78,39 @@ for these, and instead just make the answers up anew for each login.
 =head1 CAVEATS
 
 The author of this script isn't a security professional, and this script hasn't
-been audited for flaws or bugs - which there almost certainly are.
+been audited for flaws or bugs - which there certainly are.
 
 This script does no file locking, so running it in parallel may result in data
 loss, where the last writer wins.
 
-If you run it with blank or missing secrets file, it will create a new one for
-you. However it will only ask for the master password once!
+There is no provision for backup files in the script. Any backups need to be
+created outside of the program.
 
 =head1 TODO
 
 =over 4
 
-=item * Add messages when a new password file is about to be created. Plus
-prompt for the new master password twice.
+=item * Provide a shorthand for editing the multi-line notes field when you
+don't want to change anything. Currently you need to copy-n-paste the whole
+thing.
 
-=item * Allow you to change the master password - will require reading the file
-into memory, then prompting for new password twice, then writing it back out.
+=item * Allow you to change the master passphrase - will require reading the
+file into memory, then prompting for new passphrase twice, then writing it back
+out.
 
 =item * Serialise using something different to Storable, to allow non-perl
 scripts to also use the secrets file. JSON seems a likely contender, at the
 expense of needing extra CPAN installs.
 
-=item * Look at file locking to prevent data loss.
+=item * Look at file locking to prevent data loss, or monitor file checksum to
+see if it's changed since reading.
 
 =item * Allow tweaking of encryption parameters.
 
-=item * Enforce useful-length master passwords.
+=item * Enforce useful-length master passphrases.
 
-=item * Look at what perl can do to make it more difficult to recover passwords
-from RAM.
+=item * Look at what perl can do to make it more difficult to recover
+passphrases from RAM.
 
 =item * Look at ways to try and prevent the OS swapping the decrypted data to
 disk.
