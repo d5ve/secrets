@@ -90,6 +90,10 @@ created outside of the program.
 
 =over 4
 
+=item * Work out what to do for timeouts. Currently it only notices the timeout in the
+mainloop, so any actions which are started will not be timed-out until they've
+finished.
+
 =item * Provide a shorthand for editing the multi-line notes field when you
 don't want to change anything. Currently you need to copy-n-paste the whole
 thing.
